@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    {% for name in names %}
+        {% if not name == 'Riyad' %}
+            <h1 class="lal-bg">{{name}}</h1>
+        {% endif %}
+    {% endfor %}
+    {% with a=10 %}
+        <div>a is :{{a}}</div>
+    {% endwith %}
+    {{age}}
+</body>
+</html>
