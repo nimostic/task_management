@@ -1,0 +1,48 @@
+{% extends "dashboard/dashboard.html" %}
+{% block title %}Manager Dashboard{% endblock title %}
+{% block tasks %} 
+<!-- task - table -->
+            <div class="bg-white rounded-xl shadow-sm">
+                <div class="grid grid-cols-4 p-4">
+                    <div>TASK TITLE</div>
+                    <div>PRIORITY</div>
+                    <div>TEAM</div>
+                    <div>CREATED AT</div>
+                </div>
+                <!-- task-teams -->
+                <div class="divide-y divide-gray-100">
+                    {% for task in tasks %}
+                    <div class="grid grid-cols-4 gap-4 p-4 items-center">
+                        <div class="flex items-center gap-2">
+                            <div class="h-2 w-2 bg-green-500 rounded-full"></div>
+                            <div><span>{{task.title}}</span></div>
+                            <a href="{% url "update-task" task.id %}" class="px-2 py-1 bg-rose-300 rounded-lg">Edit</a>
+                            <form action="{% url "delete-task" task.id %}" method='POST'>
+                                {% csrf_token %}
+                                <button class="px-2 py-1 bg-blue-500 text-white rounded-lg">Delete</button>
+                            </form>
+                        </div>
+                        <div class=""><span
+                                class="bg-blue-50 px-3 py-1 text-blue-600 rounded-full text-sm font-bold"> {{task.details.get_priority_display}} </span>
+                        </div>
+                        <div class="flex -space-x-2">
+                            {% for emp in task.assigned_to.all %}
+                            <div
+                            class="w-8 h-8 bg-blue-500 rounded-full text-white  flex items-center justify-center border-2 border-white text-sm">
+                             {{emp.name|slice:':2'}} </div>
+                            {% endfor %}
+                        </div>
+                        <div><span class="text-gray-500"> {{task.created_at|timesince}} </span></div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="px-2 py-1 {% if message.tags == 'success' %}bg-green-500{% endif %} ">{{message}}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+{% endblock tasks %}
