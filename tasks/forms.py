@@ -1,5 +1,5 @@
 from django import forms
-from tasks.models import Task
+from tasks.models import Task,TaskDetail
 # django form (naive approach)
 
 class TaskForm(forms.Form):
@@ -81,6 +81,15 @@ class TaskModelform(StyleformedMixing,forms.ModelForm):
     
     
     '''widget using mixings'''
+    def __init__(self,*args,**kargs):
+        super().__init__(*args,**kargs)
+        self.apply_styled_widgets()
+        
+class TaskDetailForm(StyleformedMixing,forms.ModelForm):
+    class Meta:
+        model = TaskDetail
+        fields = ['priority','notes']
+        
     def __init__(self,*args,**kargs):
         super().__init__(*args,**kargs)
         self.apply_styled_widgets()
