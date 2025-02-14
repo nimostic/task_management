@@ -75,7 +75,7 @@ WSGI_APPLICATION = 'task_management.wsgi.application'
 
 
 
-#defualt database for sqlite3
+#Default database for sqlite3
 
 # DATABASES = {
 #     'default': {
@@ -89,10 +89,10 @@ WSGI_APPLICATION = 'task_management.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME',defualt=''),
-        'USER': config('DB_USER',defualt=''),
-        'PASSWORD': config('2002',defualt=''),
-        'HOST': config('localhost',defualt='localhost'),
+        'NAME': config('DB_NAME',default=''),
+        'USER': config('DB_USER',default=''),
+        'PASSWORD': config('2002',default=''),
+        'HOST': config('localhost',default='localhost'),
         'PORT': config('5432',cast=int)
     }
 }
