@@ -20,6 +20,9 @@ class TaskForm(forms.Form):
 
 class StyleformedMixing:
     """mixing to appy to form field"""
+    def __init__(self,*args,**kargs):
+        super().__init__(*args,**kargs)
+        self.apply_styled_widgets()
     default_classes = "border-2 border-gray-300 w-full p-3 rounded-lg shadow-sm focus:border-rose-500 focus:outline-none focus:ring-rose-500"
     def apply_styled_widgets(self):
         for field_name, field in self.fields.items():
@@ -78,18 +81,10 @@ class TaskModelform(StyleformedMixing,forms.ModelForm):
         #         }),
         #     'assigned_to' : forms.CheckboxSelectMultiple()
         # }
-    
-    
-    '''widget using mixings'''
-    def __init__(self,*args,**kargs):
-        super().__init__(*args,**kargs)
-        self.apply_styled_widgets()
         
 class TaskDetailForm(StyleformedMixing,forms.ModelForm):
     class Meta:
         model = TaskDetail
         fields = ['priority','notes']
         
-    def __init__(self,*args,**kargs):
-        super().__init__(*args,**kargs)
-        self.apply_styled_widgets()
+   
